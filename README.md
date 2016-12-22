@@ -53,6 +53,7 @@ You can also comment out a line using the CTRL+C and then uncomment the same lin
   of your code with this.
 */
 ```
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
 
 Drop Objects
 --
@@ -124,6 +125,7 @@ GO
 DROP FUNCTION IF EXISTS [dbo].[FunctionName];
 GO
 ```
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
 Create Objects
 --
 #####Create Table
@@ -244,7 +246,7 @@ GO
 ```SQL
 SELECT [dbo].[fn_ProcessName_ReturnServerID]([ServerName]) FROM [dbo].[vw_ProcessName_ActiveServers];
 ```
-
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
 Insert Data
 --
 ##### Single Record
@@ -306,7 +308,7 @@ SELECT 'Value5'
 UNION
 SELECT 'Value6';
 ```
-
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
 Alter Table
 --
 ##### Add Column
@@ -325,6 +327,6 @@ ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
 ```SQL
 EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
 ```
-
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
 
 
