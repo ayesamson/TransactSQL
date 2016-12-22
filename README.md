@@ -247,6 +247,27 @@ GO
 SELECT [dbo].[fn_ProcessName_ReturnServerID]([ServerName]) FROM [dbo].[vw_ProcessName_ActiveServers];
 ```
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
+
+Alter Table
+--
+##### Add Column
+```SQL
+ALTER TABLE [dbo].[TableName] ADD [Column3] VARCHAR(50) NULL;
+```
+##### Change Data Type
+```SQL
+ALTER TABLE [dbo].[TableName] ALTER COLUMN [Column3] NVARCHAR(50) NULL;
+```
+##### Drop Column
+```SQL
+ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
+```
+##### Rename Column
+```SQL
+EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
+```
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
+
 Insert Data
 --
 ##### Single Record
@@ -309,24 +330,4 @@ UNION
 SELECT 'Value6';
 ```
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
-Alter Table
---
-##### Add Column
-```SQL
-ALTER TABLE [dbo].[TableName] ADD [Column3] VARCHAR(50) NULL;
-```
-##### Change Data Type
-```SQL
-ALTER TABLE [dbo].[TableName] ALTER COLUMN [Column3] NVARCHAR(50) NULL;
-```
-##### Drop Column
-```SQL
-ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
-```
-##### Rename Column
-```SQL
-EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
-```
-[Top](https://github.com/ayesamson/TransactSQL#index-reference)
-
 
