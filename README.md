@@ -2,6 +2,33 @@
 
 This is a quick T-SQL syntax guide for many of the most frequently used statements.
 
+Index Reference
+--
+Comments
+* [Single Line Comment](https://github.com/ayesamson/TransactSQL#single-line-comment)
+* [Multi-Line Comment](https://github.com/ayesamson/TransactSQL#multi-line-block-comment)
+
+Drop Objects
+* [Drop Table](https://github.com/ayesamson/TransactSQL#drop-table)
+* [Drop Procedure](https://github.com/ayesamson/TransactSQL#drop-procedure)
+* [Drop View](https://github.com/ayesamson/TransactSQL#drop-view)
+* [Drop Function](https://github.com/ayesamson/TransactSQL#drop-function)
+
+Create Objects
+* [Create Table](https://github.com/ayesamson/TransactSQL#create-table)
+* [Create Procedure](https://github.com/ayesamson/TransactSQL#create-procedure)
+* [Create View](https://github.com/ayesamson/TransactSQL#create-view)
+* [Create Function](https://github.com/ayesamson/TransactSQL#create-function)
+
+Insert Data
+* 
+* 
+* 
+* 
+* 
+
+
+
 Comments 
 --
 ##### Single Line Comment
@@ -185,36 +212,42 @@ SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
 
 Insert Data
 --
+##### Single Record
 ```SQL
--- Single Record
 INSERT INTO [dbo].[TableName] ([Column1], [Column2]) VALUES ('Value1', 'Value2');
-
--- Multiple Records
+```
+##### Multiple Records
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
 VALUES ('Value1', 'Value2')
 ,('Value3', 'Value4')
 ,('Value5', 'Value6');
-
--- Insert With Select - Single Record
+```
+##### Insert With Select - Single Record
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
 SELECT 'Value1', 'Value2';
-
--- Insert With Select - Multiple Records
+```
+##### Insert With Select - Multiple Records
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
 SELECT 'Value1', 'Value2'
 UNION
 SELECT 'Value3', 'Value4'
 UNION
 SELECT 'Value5', 'Value6';
-
--- Single Record - Single column
+```
+##### Single Record - Single column
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) VALUES ('Value1');
-
--- Single Record - Single column
+```
+##### Single Record - Single column
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 SELECT 'Value1';
-
--- Multiple Records - Multiple columns
+```
+##### Multiple Records - Multiple columns
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 VALUES ('Value1')
 ,('Value2')
@@ -222,8 +255,9 @@ VALUES ('Value1')
 ,('Value4')
 ,('Value5')
 ,('Value6');
-
--- Insert With Select - Multiple Records - Multiple columns
+```
+##### Insert With Select - Multiple Records - Multiple columns
+```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 SELECT 'Value1'
 UNION
@@ -236,7 +270,6 @@ UNION
 SELECT 'Value5'
 UNION
 SELECT 'Value6';
-
 ```
 
 Alter Table
