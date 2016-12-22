@@ -41,8 +41,10 @@ Select Data
 * [Select Case](https://github.com/ayesamson/TransactSQL#select-case)
 * [CTE](https://github.com/ayesamson/TransactSQL#cte)
 * [Select Into](https://github.com/ayesamson/TransactSQL#simple-into)
-
-
+* Inner Join
+* Outer Join
+* Right Join
+* Left Join
 
 Comments 
 --
@@ -413,7 +415,9 @@ Database | Last Full | Last Diff | Last Log | State
 db1 |2016-12-21 21:01:37.000|2016-07-31 18:00:23.000|NULL|ONLINE
 db2 |2016-12-21 21:00:55.000|2016-07-31 18:00:28.000|NULL|ONLINE
 db3 |2016-12-21 21:03:35.000|2016-07-31 18:00:27.000|2016-12-22 15:31:03.000|ONLINE
+
 ##### Select Into
+This will create a table called [dbo].[TableName2] and copy the specified columns from [dbo].[TableName]
 ```SQL
 SELECT 
   [Column1]
@@ -422,5 +426,57 @@ SELECT
   ,[Column4]
 INTO [dbo].[TableName2]  
 FROM [dbo].[TableName];
+```
+##### Inner Join
+This will return only the matching rows from both tables based on the joining column
+```SQL
+SELECT 
+  [t1].[Column1]
+  ,[t1].[Column2]
+  ,[t1].[Column3]
+  ,[t1].[Column4]
+  ,[t2].[Column1]
+  ,[t2].[Column2]
+FROM [dbo].[TableName] [t1]
+JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
+```
+##### Outer Join
+This will return all rows from both tables
+```SQL
+SELECT 
+  [t1].[Column1]
+  ,[t1].[Column2]
+  ,[t1].[Column3]
+  ,[t1].[Column4]
+  ,[t2].[Column1]
+  ,[t2].[Column2]
+FROM [dbo].[TableName] [t1]
+OUTER JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
+```
+##### Left Join
+This will return all rows from the left table and the matching rows from the right
+```SQL
+SELECT 
+  [t1].[Column1]
+  ,[t1].[Column2]
+  ,[t1].[Column3]
+  ,[t1].[Column4]
+  ,[t2].[Column1]
+  ,[t2].[Column2]
+FROM [dbo].[TableName] [t1]
+LEFT JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
+```
+##### Right Join
+This will return all rows from the right table and the matching rows from the left
+```SQL
+SELECT 
+  [t1].[Column1]
+  ,[t1].[Column2]
+  ,[t1].[Column3]
+  ,[t1].[Column4]
+  ,[t2].[Column1]
+  ,[t2].[Column2]
+FROM [dbo].[TableName] [t1]
+RIGHT JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
 ```
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
