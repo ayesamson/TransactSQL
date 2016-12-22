@@ -3,22 +3,21 @@
 This is a quick T-SQL syntax guide for many of the most frequently used statements.
 
 Comments 
-##### Single Line Comment
 --
+##### Single Line Comment
+```SQL
 -- This is a single line comment
-
+```
 You can also comment out a line using the CTRL+C and then uncomment the same line by pressing CTRL+K
 
 ##### Multi-Line (Block) Comment
+```SQL
 /*
-  
   This is a multi-line (block) comment
-
   You can easily comment out several lines
-
   of your code with this.
-
 */
+```
 
 Drop Objects
 --
