@@ -103,6 +103,22 @@ SELECT 'Value6';
 
 ```
 
+Drop Procedure
+--
+```SQL
+IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
+  BEGIN
+    DROP PROCEDURE [dbo].[usp_ProcedureName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'usp_ProcedureName' AND [s].[name] = 'dbo' AND [o].[type] = 'P'))
+  BEGIN
+    DROP PROCEDURE [dbo].[usp_ProcedureName];
+  END
+
+-- SQL 2016 SYNTAX
+DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
+```
 
 Create Procedure
 --
@@ -168,6 +184,23 @@ ELSE
 ```SQL
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
+```
+
+Drop View
+--
+```SQL
+IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
+  BEGIN
+    DROP VIEW [dbo].[vw_ViewName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'vw_ViewName' AND [s].[name] = 'dbo' AND [o].[type] = 'V'))
+  BEGIN
+    DROP VIEW [dbo].[vw_ViewName];
+  END
+
+-- SQL 2016 SYNTAX
+DROP VIEW IF EXISTS [dbo].[vw_ViewName];
 ```
 
 Create View
