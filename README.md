@@ -3,14 +3,16 @@
 This is a quick T-SQL syntax guide for many of the most frequently used statements.
 
 Comments 
+##### Single Line Comment
 --
 -- This is a single line comment
 
 You can also comment out a line using the CTRL+C and then uncomment the same line by pressing CTRL+K
 
+##### Multi-Line (Block) Comment
 /*
   
-  This is a block (multi-line) comment
+  This is a multi-line (block) comment
 
   You can easily comment out several lines
 
@@ -18,7 +20,9 @@ You can also comment out a line using the CTRL+C and then uncomment the same lin
 
 */
 
-Drop Table
+Drop Objects
+--
+#####Drop Table
 --
 ```SQL
 IF OBJECT_ID('[dbo].[TableName]') IS NOT NULL
@@ -31,11 +35,60 @@ IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON
     DROP TABLE [dbo].[TableName];
   END
 
--- SQL 2016 SYNTAX
 DROP TABLE IF EXISTS [dbo].[TableName];
 ```
 
-Create Table
+#####Drop Procedure
+--
+```SQL
+IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
+  BEGIN
+    DROP PROCEDURE [dbo].[usp_ProcedureName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'usp_ProcedureName' AND [s].[name] = 'dbo' AND [o].[type] = 'P'))
+  BEGIN
+    DROP PROCEDURE [dbo].[usp_ProcedureName];
+  END
+
+DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
+```
+
+#####Drop View
+--
+```SQL
+IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
+  BEGIN
+    DROP VIEW [dbo].[vw_ViewName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'vw_ViewName' AND [s].[name] = 'dbo' AND [o].[type] = 'V'))
+  BEGIN
+    DROP VIEW [dbo].[vw_ViewName];
+  END
+
+DROP VIEW IF EXISTS [dbo].[vw_ViewName];
+```
+
+
+#####Drop Function
+--
+```SQL
+IF OBJECT_ID('[dbo].[FunctionName]') IS NOT NULL
+  BEGIN
+    DROP FUNCTION [dbo].[FunctionName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'FunctionName' AND [s].[name] = 'dbo' AND [o].[type] = 'FN'))
+  BEGIN
+    DROP FUNCTION [dbo].[FunctionName];
+  END
+
+DROP FUNCTION IF EXISTS [dbo].[FunctionName];
+```
+Create Objects
+--
+#####Create Table
 --
 ```SQL
 -- With Identity, Primary Key and constraints
@@ -119,22 +172,7 @@ ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
 EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
 ```
 
-Drop Procedure
---
-```SQL
-IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
-  BEGIN
-    DROP PROCEDURE [dbo].[usp_ProcedureName];
-  END
 
-IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'usp_ProcedureName' AND [s].[name] = 'dbo' AND [o].[type] = 'P'))
-  BEGIN
-    DROP PROCEDURE [dbo].[usp_ProcedureName];
-  END
-
--- SQL 2016 SYNTAX
-DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
-```
 
 Create Procedure
 --
@@ -201,24 +239,6 @@ ELSE
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
 ```
-
-Drop View
---
-```SQL
-IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
-  BEGIN
-    DROP VIEW [dbo].[vw_ViewName];
-  END
-
-IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'vw_ViewName' AND [s].[name] = 'dbo' AND [o].[type] = 'V'))
-  BEGIN
-    DROP VIEW [dbo].[vw_ViewName];
-  END
-
--- SQL 2016 SYNTAX
-DROP VIEW IF EXISTS [dbo].[vw_ViewName];
-```
-
 Create View
 --
 ```SQL
