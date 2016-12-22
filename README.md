@@ -41,6 +41,10 @@ FROM [dbo].[Servers]
 WHERE ([IsActive] = 1)
 ORDER BY 1;
 ```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
+```
 
 With Parameters
 
@@ -55,11 +59,15 @@ FROM [dbo].[Servers]
 WHERE ([ServerName] = @ServerNAme)
 ORDER BY 1;
 ```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] @ServerName = 'Server';
+```
 
-With non-mandatory Parameter
+With (Optional) Parameter
 
 ```SQL
-CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] (
+CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] (
   @ServerName VARCHAR(50) = NULL
 )
 AS
@@ -79,4 +87,24 @@ ELSE
     WHERE ([IsActive] = 1)
     ORDER BY 1;
   END
+```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
+```
+
+Create View
+--
+```SQL
+CREATE VIEW [dbo].[vw_ProcessName_ActiveServers]
+AS
+SELECT 
+  [ServerName]
+FROM [dbo].[Servers]
+WHERE ([IsActive] = 1);
+```
+##### Example:
+```SQL
+SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
 ```
