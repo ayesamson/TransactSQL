@@ -42,13 +42,16 @@ IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
   BEGIN
     DROP PROCEDURE [dbo].[usp_ProcedureName];
   END
+GO
 
 IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'usp_ProcedureName' AND [s].[name] = 'dbo' AND [o].[type] = 'P'))
   BEGIN
     DROP PROCEDURE [dbo].[usp_ProcedureName];
   END
+GO
 
 DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
+GO
 ```
 
 #####Drop View
@@ -57,15 +60,17 @@ IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
   BEGIN
     DROP VIEW [dbo].[vw_ViewName];
   END
+GO
 
 IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'vw_ViewName' AND [s].[name] = 'dbo' AND [o].[type] = 'V'))
   BEGIN
     DROP VIEW [dbo].[vw_ViewName];
   END
+GO
 
 DROP VIEW IF EXISTS [dbo].[vw_ViewName];
+GO
 ```
-
 
 #####Drop Function
 ```SQL
@@ -73,13 +78,16 @@ IF OBJECT_ID('[dbo].[FunctionName]') IS NOT NULL
   BEGIN
     DROP FUNCTION [dbo].[FunctionName];
   END
+GO
 
 IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'FunctionName' AND [s].[name] = 'dbo' AND [o].[type] = 'FN'))
   BEGIN
     DROP FUNCTION [dbo].[FunctionName];
   END
+GO
 
 DROP FUNCTION IF EXISTS [dbo].[FunctionName];
+GO
 ```
 Create Objects
 --
@@ -92,11 +100,11 @@ CREATE TABLE [dbo].[TableName] (
   ,Column2 [varchar](50) NULL
   ,CreateDate [datetime] CONSTRAINT [DF_TableName_CreateDate] DEFAULT (GETDATE())
 );
+GO
 ```
 #####Create Procedure
-Without parameters
-
 ```SQL
+-- Without parameters
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] 
 AS
 SELECT 
@@ -104,15 +112,15 @@ SELECT
 FROM [dbo].[Servers]
 WHERE ([IsActive] = 1)
 ORDER BY 1;
+GO
 ```
-##### Example:
+##### Usage Example:
 ```SQL
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
 ```
 
-With Parameters
-
 ```SQL
+-- With Parameter
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] (
   @ServerName VARCHAR(50)
 )
@@ -122,15 +130,15 @@ SELECT
 FROM [dbo].[Servers]
 WHERE ([ServerName] = @ServerNAme)
 ORDER BY 1;
+GO
 ```
-##### Example:
+##### Usage Example:
 ```SQL
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] @ServerName = 'Server';
 ```
 
-With (Optional) Parameter
-
 ```SQL
+--With (Optional) Parameter
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] (
   @ServerName VARCHAR(50) = NULL
 )
@@ -151,8 +159,9 @@ ELSE
     WHERE ([IsActive] = 1)
     ORDER BY 1;
   END
+GO
 ```
-##### Example:
+##### Usage Example:
 ```SQL
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
 EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
@@ -166,8 +175,9 @@ SELECT
   [ServerName]
 FROM [dbo].[Servers]
 WHERE ([IsActive] = 1);
+GO
 ```
-##### Example:
+##### Usage Example:
 ```SQL
 SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
 ```
