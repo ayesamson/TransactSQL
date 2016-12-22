@@ -21,11 +21,14 @@ Create Objects
 * [Create Function](https://github.com/ayesamson/TransactSQL#create-function)
 
 Insert Data
-* 
-* 
-* 
-* 
-* 
+* [Single Record](https://github.com/ayesamson/TransactSQL#single-record)
+* [Multiple Records](https://github.com/ayesamson/TransactSQL#multiple-records)
+* [Insert With Select - Single Record](https://github.com/ayesamson/TransactSQL#insert-with-select---single-record)
+* [Insert With Select - Multiple Records] (https://github.com/ayesamson/TransactSQL#insert-with-select---multiple-records)
+* [Single Record - Single Column] (https://github.com/ayesamson/TransactSQL#single-record---single-column)
+* [Insert With Select - Single Record - Single Column]()
+* [Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#multiple-records---multiple-columns)
+* [Insert With Select - Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#insert-with-select---multiple-records---multiple-columns)
 
 
 
@@ -241,7 +244,7 @@ SELECT 'Value5', 'Value6';
 ```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) VALUES ('Value1');
 ```
-##### Single Record - Single column
+##### Insert With Select - Single Record - Single column
 ```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 SELECT 'Value1';
