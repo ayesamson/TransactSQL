@@ -18,9 +18,27 @@ You can also comment out a line using the CTRL+C and then uncomment the same lin
 
 */
 
+Drop Table
+--
+```SQL
+IF OBJECT_ID('[dbo].[TableName]') IS NOT NULL
+  BEGIN
+    DROP TABLE [dbo].[TableName];
+  END
+
+IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON [o].[schema_id] = [s].[schema_id] WHERE ([o].[Name] = 'TableName' AND [s].[name] = 'dbo' AND [o].[type] = 'U'))
+  BEGIN
+    DROP TABLE [dbo].[TableName];
+  END
+
+-- SQL 2016 SYNTAX
+DROP TABLE IF EXISTS [dbo].[TableName];
+```
+
 Create Table
 --
 ```SQL
+-- With Identity, Primary Key and constraints
 CREATE TABLE [dbo].[TableName] (
   id [int] IDENTITY(1,1) CONSTRAINT [pk_TableName_id] PRIMARY KEY
   ,Column1 [varchar](50) NOT NULL
@@ -28,6 +46,64 @@ CREATE TABLE [dbo].[TableName] (
   ,CreateDate [datetime] CONSTRAINT [DF_TableName_CreateDate] DEFAULT (GETDATE())
 );
 ```
+
+Insert Data
+--
+```SQL
+-- Single Record
+INSERT INTO [dbo].[TableName] ([Column1], [Column2]) VALUES ('Value1', 'Value2');
+
+-- Multiple Records
+INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
+VALUES ('Value1', 'Value2')
+,('Value3', 'Value4')
+,('Value5', 'Value6');
+
+-- Insert With Select - Single Record
+INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
+SELECT 'Value1', 'Value2';
+
+-- Insert With Select - Multiple Records
+INSERT INTO [dbo].[TableName] ([Column1], [Column2]) 
+SELECT 'Value1', 'Value2'
+UNION
+SELECT 'Value3', 'Value4'
+UNION
+SELECT 'Value5', 'Value6';
+
+-- Single Record - Single column
+INSERT INTO [dbo].[TableName] ([Column1]) VALUES ('Value1');
+
+-- Single Record - Single column
+INSERT INTO [dbo].[TableName] ([Column1]) 
+SELECT 'Value1';
+
+-- Multiple Records - Multiple columns
+INSERT INTO [dbo].[TableName] ([Column1]) 
+VALUES ('Value1')
+,('Value2')
+,('Value3')
+,('Value4')
+,('Value5')
+,('Value6');
+
+-- Insert With Select - Multiple Records - Multiple columns
+INSERT INTO [dbo].[TableName] ([Column1]) 
+SELECT 'Value1'
+UNION
+SELECT 'Value2'
+UNION
+SELECT 'Value3'
+UNION
+SELECT 'Value4'
+UNION
+SELECT 'Value5'
+UNION
+SELECT 'Value6';
+
+```
+
+
 Create Procedure
 --
 Without parameters
