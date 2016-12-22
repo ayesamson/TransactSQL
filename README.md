@@ -241,17 +241,20 @@ SELECT 'Value6';
 
 Alter Table
 --
+##### Add Column
 ```SQL
--- Add column
 ALTER TABLE [dbo].[TableName] ADD [Column3] VARCHAR(50) NULL;
-
--- Change column data type
+```
+##### Change Data Type
+```SQL
 ALTER TABLE [dbo].[TableName] ALTER COLUMN [Column3] NVARCHAR(50) NULL;
-
--- Drop column
+```
+##### Drop Column
+```SQL
 ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
-
--- Rename Column
+```
+##### Rename Column
+```SQL
 EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
 ```
 
