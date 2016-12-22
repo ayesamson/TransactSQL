@@ -22,7 +22,6 @@ You can also comment out a line using the CTRL+C and then uncomment the same lin
 Drop Objects
 --
 #####Drop Table
---
 ```SQL
 IF OBJECT_ID('[dbo].[TableName]') IS NOT NULL
   BEGIN
@@ -38,7 +37,6 @@ DROP TABLE IF EXISTS [dbo].[TableName];
 ```
 
 #####Drop Procedure
---
 ```SQL
 IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
   BEGIN
@@ -54,7 +52,6 @@ DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
 ```
 
 #####Drop View
---
 ```SQL
 IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
   BEGIN
@@ -71,7 +68,6 @@ DROP VIEW IF EXISTS [dbo].[vw_ViewName];
 
 
 #####Drop Function
---
 ```SQL
 IF OBJECT_ID('[dbo].[FunctionName]') IS NOT NULL
   BEGIN
@@ -88,7 +84,6 @@ DROP FUNCTION IF EXISTS [dbo].[FunctionName];
 Create Objects
 --
 #####Create Table
---
 ```SQL
 -- With Identity, Primary Key and constraints
 CREATE TABLE [dbo].[TableName] (
@@ -98,6 +93,85 @@ CREATE TABLE [dbo].[TableName] (
   ,CreateDate [datetime] CONSTRAINT [DF_TableName_CreateDate] DEFAULT (GETDATE())
 );
 ```
+#####Create Procedure
+Without parameters
+
+```SQL
+CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] 
+AS
+SELECT 
+  [ServerName]
+FROM [dbo].[Servers]
+WHERE ([IsActive] = 1)
+ORDER BY 1;
+```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
+```
+
+With Parameters
+
+```SQL
+CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] (
+  @ServerName VARCHAR(50)
+)
+AS
+SELECT 
+  [ServerName]
+FROM [dbo].[Servers]
+WHERE ([ServerName] = @ServerNAme)
+ORDER BY 1;
+```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] @ServerName = 'Server';
+```
+
+With (Optional) Parameter
+
+```SQL
+CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] (
+  @ServerName VARCHAR(50) = NULL
+)
+AS
+IF (@ServerName IS NOT NULL)
+  BEGIN
+    SELECT 
+      [ServerName]
+    FROM [dbo].[Servers]
+    WHERE ([ServerName] = @ServerName)
+    ORDER BY 1;
+  END
+ELSE
+  BEGIN
+    SELECT 
+      [ServerName]
+    FROM [dbo].[Servers]
+    WHERE ([IsActive] = 1)
+    ORDER BY 1;
+  END
+```
+##### Example:
+```SQL
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
+EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
+```
+
+#####Create View
+```SQL
+CREATE VIEW [dbo].[vw_ProcessName_ActiveServers]
+AS
+SELECT 
+  [ServerName]
+FROM [dbo].[Servers]
+WHERE ([IsActive] = 1);
+```
+##### Example:
+```SQL
+SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
+```
+
 
 Insert Data
 --
@@ -173,82 +247,3 @@ EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';
 
 
 
-Create Procedure
---
-Without parameters
-
-```SQL
-CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] 
-AS
-SELECT 
-  [ServerName]
-FROM [dbo].[Servers]
-WHERE ([IsActive] = 1)
-ORDER BY 1;
-```
-##### Example:
-```SQL
-EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
-```
-
-With Parameters
-
-```SQL
-CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] (
-  @ServerName VARCHAR(50)
-)
-AS
-SELECT 
-  [ServerName]
-FROM [dbo].[Servers]
-WHERE ([ServerName] = @ServerNAme)
-ORDER BY 1;
-```
-##### Example:
-```SQL
-EXECUTE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] @ServerName = 'Server';
-```
-
-With (Optional) Parameter
-
-```SQL
-CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] (
-  @ServerName VARCHAR(50) = NULL
-)
-AS
-IF (@ServerName IS NOT NULL)
-  BEGIN
-    SELECT 
-      [ServerName]
-    FROM [dbo].[Servers]
-    WHERE ([ServerName] = @ServerName)
-    ORDER BY 1;
-  END
-ELSE
-  BEGIN
-    SELECT 
-      [ServerName]
-    FROM [dbo].[Servers]
-    WHERE ([IsActive] = 1)
-    ORDER BY 1;
-  END
-```
-##### Example:
-```SQL
-EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
-EXECUTE [dbo].[usp_ProcessName_GetActiveServers] @ServerName = 'Server';
-```
-Create View
---
-```SQL
-CREATE VIEW [dbo].[vw_ProcessName_ActiveServers]
-AS
-SELECT 
-  [ServerName]
-FROM [dbo].[Servers]
-WHERE ([IsActive] = 1);
-```
-##### Example:
-```SQL
-SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
-```
