@@ -40,7 +40,7 @@ Select Data
 * [Simple Select](https://github.com/ayesamson/TransactSQL#simple-select)
 * [Select Case](https://github.com/ayesamson/TransactSQL#select-case)
 * [CTE](https://github.com/ayesamson/TransactSQL#cte)
-* [Select Into](https://github.com/ayesamson/TransactSQL#simple-into)
+* [Select Into](https://github.com/ayesamson/TransactSQL#select-into)
 * [Inner Join](https://github.com/ayesamson/TransactSQL#inner-join)
 * [Outer Join](https://github.com/ayesamson/TransactSQL#outer-join)
 * [Left Join](https://github.com/ayesamson/TransactSQL#left-join)
