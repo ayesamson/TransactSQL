@@ -41,10 +41,10 @@ Select Data
 * [Select Case](https://github.com/ayesamson/TransactSQL#select-case)
 * [CTE](https://github.com/ayesamson/TransactSQL#cte)
 * [Select Into](https://github.com/ayesamson/TransactSQL#simple-into)
-* Inner Join
-* Outer Join
-* Right Join
-* Left Join
+* [Inner Join](https://github.com/ayesamson/TransactSQL#inner-join)
+* [Outer Join](https://github.com/ayesamson/TransactSQL#outer-join)
+* [Left Join](https://github.com/ayesamson/TransactSQL#left-join)
+* [Right Join](https://github.com/ayesamson/TransactSQL#right-join)
 
 Comments 
 --
