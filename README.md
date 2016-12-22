@@ -217,6 +217,33 @@ GO
 SELECT [ServerName] FROM [dbo].[vw_ProcessName_ActiveServers];
 ```
 
+#####Create Function
+```SQL
+CREATE FUNCTION [dbo].[fn_ProcessName_ReturnServerID] (
+  @Server VARCHAR(50)
+)
+RETURNS INT
+AS
+DECLARE @serverid INT
+SELECT 
+  @serverid = [id]
+FROM [dbo].[Servers]
+WHERE ([ServerName] = @Server);
+
+IF (@serverid IS NOT NULL)
+  BEGIN
+    RETURN @serverid
+  END
+ELSE
+  BEGIN
+    RETURN 0
+  END
+GO
+```
+##### Usage Example:
+```SQL
+SELECT [dbo].[fn_ProcessName_ReturnServerID]([ServerName]) FROM [dbo].[vw_ProcessName_ActiveServers];
+```
 
 Insert Data
 --
