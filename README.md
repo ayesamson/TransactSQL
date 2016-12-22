@@ -37,9 +37,10 @@ Insert Data
 * [Insert With Select - Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#insert-with-select---multiple-records---multiple-columns)
 
 Select Data
-* [Simple Select]
-* [Select Case]
-* [CTE]
+* [Simple Select](https://github.com/ayesamson/TransactSQL#simple-select)
+* [Select Case](https://github.com/ayesamson/TransactSQL#select-case)
+* [CTE](https://github.com/ayesamson/TransactSQL#cte)
+* [Select Into](https://github.com/ayesamson/TransactSQL#simple-into)
 
 
 
@@ -310,7 +311,7 @@ INSERT INTO [dbo].[TableName] ([Column1]) VALUES ('Value1');
 INSERT INTO [dbo].[TableName] ([Column1]) 
 SELECT 'Value1';
 ```
-##### Multiple Records - Multiple columns
+##### Multiple Records - Single columns
 ```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 VALUES ('Value1')
@@ -320,7 +321,7 @@ VALUES ('Value1')
 ,('Value5')
 ,('Value6');
 ```
-##### Insert With Select - Multiple Records - Multiple columns
+##### Insert With Select - Multiple Records - Single columns
 ```SQL
 INSERT INTO [dbo].[TableName] ([Column1]) 
 SELECT 'Value1'
@@ -412,3 +413,14 @@ Database | Last Full | Last Diff | Last Log | State
 db1 |2016-12-21 21:01:37.000|2016-07-31 18:00:23.000|NULL|ONLINE
 db2 |2016-12-21 21:00:55.000|2016-07-31 18:00:28.000|NULL|ONLINE
 db3 |2016-12-21 21:03:35.000|2016-07-31 18:00:27.000|2016-12-22 15:31:03.000|ONLINE
+##### Select Into
+```SQL
+SELECT 
+  [Column1]
+  ,[Column2]
+  ,[Column3]
+  ,[Column4]
+INTO [dbo].[TableName2]  
+FROM [dbo].[TableName];
+```
+[Top](https://github.com/ayesamson/TransactSQL#index-reference)
