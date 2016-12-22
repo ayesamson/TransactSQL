@@ -103,6 +103,22 @@ SELECT 'Value6';
 
 ```
 
+Alter Table
+--
+```SQL
+-- Add column
+ALTER TABLE [dbo].[TableName] ADD [Column3] VARCHAR(50) NULL;
+
+-- Change column data type
+ALTER TABLE [dbo].[TableName] ALTER COLUMN [Column3] NVARCHAR(50) NULL;
+
+-- Drop column
+ALTER TABLE [dbo].[TableName] DROP COLUMN [Column3];
+
+-- Rename Column
+EXECUTE [dbo].[sp_rename] 'TableName.ColumnName', 'NewColumnName', 'COLUMN';  
+```
+
 Drop Procedure
 --
 ```SQL
