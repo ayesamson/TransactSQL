@@ -408,6 +408,7 @@ LEFT JOIN [log] ON [full].[dname] = [log].[lname]
 ORDER BY 1,2;
 ```
 Database | Last Full | Last Diff | Last Log | State
+---|---|---|---|---|
 db1 |2016-12-21 21:01:37.000|2016-07-31 18:00:23.000|NULL|ONLINE
 db2 |2016-12-21 21:00:55.000|2016-07-31 18:00:28.000|NULL|ONLINE
 db3 |2016-12-21 21:03:35.000|2016-07-31 18:00:27.000|2016-12-22 15:31:03.000|ONLINE
