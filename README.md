@@ -30,6 +30,11 @@ Insert Data
 * [Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#multiple-records---multiple-columns)
 * [Insert With Select - Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#insert-with-select---multiple-records---multiple-columns)
 
+Alter Table
+* [Add Column](https://github.com/ayesamson/TransactSQL#add-column)
+* [Change Data Type](https://github.com/ayesamson/TransactSQL#change-data-type)
+* [Drop Column](https://github.com/ayesamson/TransactSQL#drop-column)
+* [Rename Column](https://github.com/ayesamson/TransactSQL#rename-column)
 
 
 Comments 
