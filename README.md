@@ -348,3 +348,66 @@ SELECT
   ,[Column4]
 FROM [dbo].[TableName];
 ```
+##### Select Case
+```SQL
+SELECT 
+  ,[Column1]
+  ,CASE 
+    WHEN [Column2] = 0 THEN 'No'
+    ELSE 'Yes'
+  END AS [IsActive]
+  ,[Column3]
+FROM [dbo].[TableName];
+```
+##### CTE
+```SQL
+WITH [full] (dname, dlbd)
+AS
+(
+	SELECT 
+		[d].[name]
+		,MAX([b].[backup_finish_date])
+	FROM [master].[sys].[databases] [d]
+	JOIN [msdb].[dbo].[backupset] [b] ON [d].[name] = [b].[database_name]
+	WHERE ([b].[type] = 'D')
+	AND ([b].[is_copy_only] = 0)
+	GROUP BY [d].[name],[b].[type]
+),[diff] (iname, ilbd)
+AS
+(
+	SELECT 
+		[d].[name]
+		,MAX([b].[backup_finish_date])
+	FROM [master].[sys].[databases] [d]
+	JOIN [msdb].[dbo].[backupset] [b] ON [d].[name] = [b].[database_name]
+	WHERE ([b].[type] = 'I')
+	AND ([b].[is_copy_only] = 0)
+	GROUP BY [d].[name],[b].[type]
+),[log] (lname, llbd)
+AS
+(
+	SELECT 
+		[d].[name]
+		,MAX([b].[backup_finish_date])
+	FROM [master].[sys].[databases] [d]
+	JOIN [msdb].[dbo].[backupset] [b] ON [d].[name] = [b].[database_name]
+	WHERE ([b].[type] = 'L')
+	AND ([b].[is_copy_only] = 0)
+	GROUP BY [d].[name],[b].[type]
+)
+SELECT 
+	[full].[dname] AS 'Database'
+	,[full].[dlbd] AS 'Last Full'
+	,[diff].[ilbd] AS 'Last Differential'
+	,[log].[llbd]  AS 'Last Log'
+	,[state_desc]
+FROM [full]
+JOIN [sys].[databases] [d] ON [full].[dname] = [d].[name]
+LEFT JOIN [diff] ON [full].[dname] = [diff].[iname]
+LEFT JOIN [log] ON [full].[dname] = [log].[lname]
+ORDER BY 1,2;
+```
+Database | Last Full | Last Diff | Last Log | State
+db1 |2016-12-21 21:01:37.000|2016-07-31 18:00:23.000|NULL|ONLINE
+db2 |2016-12-21 21:00:55.000|2016-07-31 18:00:28.000|NULL|ONLINE
+db3 |2016-12-21 21:03:35.000|2016-07-31 18:00:27.000|2016-12-22 15:31:03.000|ONLINE
