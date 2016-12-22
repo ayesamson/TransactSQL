@@ -20,6 +20,12 @@ Create Objects
 * [Create View](https://github.com/ayesamson/TransactSQL#create-view)
 * [Create Function](https://github.com/ayesamson/TransactSQL#create-function)
 
+Alter Table
+* [Add Column](https://github.com/ayesamson/TransactSQL#add-column)
+* [Change Data Type](https://github.com/ayesamson/TransactSQL#change-data-type)
+* [Drop Column](https://github.com/ayesamson/TransactSQL#drop-column)
+* [Rename Column](https://github.com/ayesamson/TransactSQL#rename-column)
+
 Insert Data
 * [Single Record](https://github.com/ayesamson/TransactSQL#single-record)
 * [Multiple Records](https://github.com/ayesamson/TransactSQL#multiple-records)
@@ -30,11 +36,11 @@ Insert Data
 * [Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#multiple-records---multiple-columns)
 * [Insert With Select - Multiple Records - Single Column](https://github.com/ayesamson/TransactSQL#insert-with-select---multiple-records---multiple-columns)
 
-Alter Table
-* [Add Column](https://github.com/ayesamson/TransactSQL#add-column)
-* [Change Data Type](https://github.com/ayesamson/TransactSQL#change-data-type)
-* [Drop Column](https://github.com/ayesamson/TransactSQL#drop-column)
-* [Rename Column](https://github.com/ayesamson/TransactSQL#rename-column)
+Select Data
+* [Simple Select]
+* [Select Case]
+* [CTE]
+
 
 
 Comments 
@@ -331,3 +337,14 @@ SELECT 'Value6';
 ```
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
 
+Select Data
+--
+##### Simple Select
+```SQL
+SELECT 
+  [Column1]
+  ,[Column2]
+  ,[Column3]
+  ,[Column4]
+FROM [dbo].[TableName];
+```
