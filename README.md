@@ -47,6 +47,12 @@ Select Data
 * [Right Join](https://github.com/ayesamson/TransactSQL#right-join)
 * [Windows Function](https://github.com/ayesamson/TransactSQL#windows-function)
 * [Coalesce](https://github.com/ayesamson/TransactSQL#coalesce)
+* [Max](https://github.com/ayesamson/TransactSQL#max)
+* [Parsename](https://github.com/ayesamson/TransactSQL#parsename)
+* [Charindex](https://github.com/ayesamson/TransactSQL#charindex)
+* [Left](https://github.com/ayesamson/TransactSQL#left)
+* [Len](https://github.com/ayesamson/TransactSQL#len)
+* [Right](https://github.com/ayesamson/TransactSQL#right)
 
 Comments 
 --
@@ -514,7 +520,7 @@ RowID|name|recovery_model_desc
 2|msdb|SIMPLE
 3|tempdb|SIMPLE
 
-#####Coalesce
+##### Coalesce
 ```SQL
 DECLARE @cmd VARCHAR(4000)
 SELECT @cmd =
@@ -527,5 +533,89 @@ SELECT @cmd
 ---|
 KILL 51; KILL 52; KILL 53; KILL 64; KILL 66; KILL 67; |
 
+##### Max
+```SQL
+-- IDENTITY DROPPED DATABASES
+SELECT 
+	[database_name]
+	,MAX([backup_finish_date]) AS [LastBackupDate]
+FROM [msdb].[dbo].[backupset]
+WHERE [database_name] NOT IN (
+	SELECT 
+		[name] 
+	FROM [sys].[databases]
+) GROUP BY [database_name]
+```
+
+database_name|LastBackupDate
+---|---
+db1|2015-03-11 16:02:28.000
+db2|2015-03-11 16:02:46.000
+db3|2015-03-11 16:02:49.000
+db4|2015-03-11 16:02:43.000
+
+##### Parsename
+```SQL
+DECLARE @ip VARCHAR(25)
+SET @ip = '192.168.1.10'
+SELECT 
+	PARSENAME(@ip,4) AS [Octet1]
+	,PARSENAME(@ip,3) AS [Octet2]
+	,PARSENAME(@ip,2) AS [Octet3]
+	,PARSENAME(@ip,1) AS [Octet4];
+```
+Octet1|Octet2|Octet3|Octet4
+---|---|---|---
+192|168|1|10
+
+##### Charindex
+```SQL
+DECLARE @SqlInstance VARCHAR(50)
+SET @SqlInstance = 'Server\InstanceName'
+SELECT 
+	CHARINDEX('\',@SqlInstance)
+```
+(no column name) |
+---|
+7 |
+
+##### Left
+```SQL
+DECLARE @SqlInstance VARCHAR(50)
+SET @SqlInstance = 'Server\InstanceName'
+SELECT 
+	CHARINDEX('\',@SqlInstance)
+	,LEFT(@SqlInstance,CHARINDEX('\',@SqlInstance)-1)
+```
+(no column name) |(no column name) 
+---|---
+7 |Server
+
+##### Len
+```SQL
+DECLARE @SqlInstance VARCHAR(50)
+SET @SqlInstance = 'Server\InstanceName'
+SELECT 
+	CHARINDEX('\',@SqlInstance)
+	,LEFT(@SqlInstance,CHARINDEX('\',@SqlInstance)-1)
+	,LEN(@SqlInstance)
+```
+(no column name)|(no column name)|(no column name)
+---|---|---
+7 |Server|19
+
+##### Right
+```SQL
+DECLARE @SqlInstance VARCHAR(50)
+SET @SqlInstance = 'Server\InstanceName'
+SELECT 
+	CHARINDEX('\',@SqlInstance)
+	,LEFT(@SqlInstance,CHARINDEX('\',@SqlInstance)-1)
+	,LEN(@SqlInstance)
+	,RIGHT(@SqlInstance,(LEN(@SqlInstance) - CHARINDEX('\',@SqlInstance)))
+```
+(no column name)|(no column name)|(no column name)|(no column name)
+---|---|---|---
+7 |Server|19|InstanceName
 
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
