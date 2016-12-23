@@ -535,7 +535,7 @@ KILL 51; KILL 52; KILL 53; KILL 64; KILL 66; KILL 67; |
 
 ##### Max
 ```SQL
--- IDENTITY DROPPED DATABASES
+-- IDENTIFY DROPPED/MISSING DATABASES
 SELECT 
 	[database_name]
 	,MAX([backup_finish_date]) AS [LastBackupDate]
