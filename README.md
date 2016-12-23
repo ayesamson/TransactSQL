@@ -45,6 +45,7 @@ Select Data
 * [Outer Join](https://github.com/ayesamson/TransactSQL#outer-join)
 * [Left Join](https://github.com/ayesamson/TransactSQL#left-join)
 * [Right Join](https://github.com/ayesamson/TransactSQL#right-join)
+* [Windows Function](https://github.com/ayesamson/TransactSQL#windows-function)
 
 Comments 
 --
@@ -479,4 +480,35 @@ SELECT
 FROM [dbo].[TableName] [t1]
 RIGHT JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
 ```
+##### Windows Function
+This will return all rows from the right table and the matching rows from the left
+```SQL
+SELECT
+	ROW_NUMBER() OVER (ORDER BY Name) AS RowID
+	,[name]
+	,[recovery_model_desc]
+FROM [sys].[databases]
+WHERE ([database_id] < 5);
+```
+RowID|name|recovery_model_desc
+---|---|---
+1|master|SIMPLE
+2|model|FULL
+3|msdb|SIMPLE
+4|tempdb|SIMPLE
+```SQL
+SELECT
+	ROW_NUMBER() OVER (PARTITION BY [recovery_model_desc] ORDER BY [name] ASC) AS RowID
+	,[name]
+	,[recovery_model_desc]
+FROM [sys].[databases]
+WHERE ([database_id] < 5);
+```
+RowID|name|recovery_model_desc
+---|---|---
+1|master|SIMPLE
+1|model|FULL
+2|msdb|SIMPLE
+3|tempdb|SIMPLE
+
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
