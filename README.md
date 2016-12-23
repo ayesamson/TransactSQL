@@ -74,7 +74,7 @@ You can also comment out a line using the CTRL+C and then uncomment the same lin
 
 Drop Objects
 --
-#####Drop Table
+##### Drop Table
 ```SQL
 IF OBJECT_ID('[dbo].[TableName]') IS NOT NULL
   BEGIN
@@ -89,7 +89,7 @@ IF EXISTS(SELECT [o].[Name] FROM [sys].[objects] [o] JOIN [sys].[schemas] [s] ON
 DROP TABLE IF EXISTS [dbo].[TableName];
 ```
 
-#####Drop Procedure
+##### Drop Procedure
 ```SQL
 IF OBJECT_ID('[dbo].[usp_ProcedureName]') IS NOT NULL
   BEGIN
@@ -107,7 +107,7 @@ DROP PROCEDURE IF EXISTS [dbo].[usp_ProcedureName];
 GO
 ```
 
-#####Drop View
+##### Drop View
 ```SQL
 IF OBJECT_ID('[dbo].[vw_ViewName]') IS NOT NULL
   BEGIN
@@ -125,7 +125,7 @@ DROP VIEW IF EXISTS [dbo].[vw_ViewName];
 GO
 ```
 
-#####Drop Function
+##### Drop Function
 ```SQL
 IF OBJECT_ID('[dbo].[FunctionName]') IS NOT NULL
   BEGIN
@@ -145,7 +145,7 @@ GO
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
 Create Objects
 --
-#####Create Table
+##### Create Table
 ```SQL
 -- With Identity, Primary Key and constraints
 CREATE TABLE [dbo].[TableName] (
@@ -156,9 +156,9 @@ CREATE TABLE [dbo].[TableName] (
 );
 GO
 ```
-#####Create Procedure
+##### Create Procedure
 ```SQL
--- Without parameters
+-- WITHOUT PARAMETERS
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] 
 AS
 SELECT 
@@ -174,7 +174,7 @@ EXECUTE [dbo].[usp_ProcessName_GetActiveServers];
 ```
 
 ```SQL
--- With Parameter
+-- WITH PARAMETER
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] (
   @ServerName VARCHAR(50)
 )
@@ -192,7 +192,7 @@ EXECUTE [dbo].[usp_ProcessName_GetActiveServers_ByServerName] @ServerName = 'Ser
 ```
 
 ```SQL
---With (Optional) Parameter
+-- WITH (OPTIONAL) PARAMETER
 CREATE PROCEDURE [dbo].[usp_ProcessName_GetActiveServers] (
   @ServerName VARCHAR(50) = NULL
 )
