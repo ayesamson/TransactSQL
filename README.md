@@ -46,6 +46,7 @@ Select Data
 * [Left Join](https://github.com/ayesamson/TransactSQL#left-join)
 * [Right Join](https://github.com/ayesamson/TransactSQL#right-join)
 * [Windows Function](https://github.com/ayesamson/TransactSQL#windows-function)
+* [Coalesce](https://github.com/ayesamson/TransactSQL#coalesce)
 
 Comments 
 --
@@ -481,7 +482,7 @@ FROM [dbo].[TableName] [t1]
 RIGHT JOIN [dbo].[TableName2] [t2] ON [t1].[ColumnID] = [t2].[ColumnID];
 ```
 ##### Windows Function
-This will return all rows from the right table and the matching rows from the left
+Add row number to result set 
 ```SQL
 SELECT
 	ROW_NUMBER() OVER (ORDER BY Name) AS RowID
@@ -496,6 +497,8 @@ RowID|name|recovery_model_desc
 2|model|FULL
 3|msdb|SIMPLE
 4|tempdb|SIMPLE
+
+Add row number to result set and restart the numbering when the recovery model changes
 ```SQL
 SELECT
 	ROW_NUMBER() OVER (PARTITION BY [recovery_model_desc] ORDER BY [name] ASC) AS RowID
@@ -506,9 +509,23 @@ WHERE ([database_id] < 5);
 ```
 RowID|name|recovery_model_desc
 ---|---|---
-1|master|SIMPLE
 1|model|FULL
+1|master|SIMPLE
 2|msdb|SIMPLE
 3|tempdb|SIMPLE
+
+#####Coalesce
+```SQL
+DECLARE @cmd VARCHAR(4000)
+SELECT @cmd =
+COALESCE(@cmd, '') + 'KILL ' + CAST([spid] AS VARCHAR(10)) + '; '
+FROM [sys].[sysprocesses]
+WHERE ([spid] > 50);
+SELECT @cmd
+```
+(no column name) |
+---|
+KILL 51; KILL 52; KILL 53; KILL 64; KILL 66; KILL 67; |
+
 
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
