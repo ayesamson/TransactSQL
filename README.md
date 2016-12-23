@@ -556,6 +556,7 @@ db4|2015-03-11 16:02:43.000
 
 ##### Parsename
 ```SQL
+-- PERIODS (.) ARE THE KEY HERE
 DECLARE @ip VARCHAR(25)
 SET @ip = '192.168.1.10'
 SELECT 
