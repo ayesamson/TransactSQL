@@ -143,6 +143,7 @@ DROP FUNCTION IF EXISTS [dbo].[FunctionName];
 GO
 ```
 [Top](https://github.com/ayesamson/TransactSQL#index-reference)
+
 Create Objects
 --
 ##### Create Table
